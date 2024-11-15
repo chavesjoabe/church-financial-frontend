@@ -6,6 +6,7 @@ import { HomeCard } from '../HomeCard/HomeCard';
 import { useAuth } from '../../context/LoginContext';
 import { PendingBalances } from '../PendingBalances/PendingBalances';
 import { BalanceReport } from '../BalanceReport/BalanceReport';
+import { UserManagement } from '../UserManagement/UserManagement';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,6 +68,9 @@ export const Home: React.FC = () => {
           {user?.role === 'ADMIN' && (
             <Tab label='Criação de usuários' {...a11yProps(4)} />
           )}
+          {user?.role === 'ADMIN' && (
+            <Tab label='Gerenciamento de usuários' {...a11yProps(5)} />
+          )}
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -91,6 +95,13 @@ export const Home: React.FC = () => {
       {user?.role === 'ADMIN' ? (
         <CustomTabPanel value={value} index={5}>
           <CreateUser />
+        </CustomTabPanel>
+      ) : (
+        ''
+      )}
+      {user?.role === 'ADMIN' ? (
+        <CustomTabPanel value={value} index={6}>
+          <UserManagement />
         </CustomTabPanel>
       ) : (
         ''

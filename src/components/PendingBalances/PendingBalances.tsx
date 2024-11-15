@@ -171,7 +171,7 @@ export const PendingBalances: React.FC = () => {
             </Table>
           </TableContainer>
           <PendingBalanceModal
-            balance={modalBalance}
+            balance={modalBalance!}
             open={open}
             handleClose={handleClose}
             loading={loading}

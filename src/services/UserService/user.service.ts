@@ -1,4 +1,5 @@
 import axios, { HttpStatusCode } from 'axios';
+import { User } from '../../models/user.models';
 
 export type CreateUserPayload = {
   name: string;
@@ -83,7 +84,27 @@ export class UserService {
 
       return response;
     } catch (error) {
-      const errorMessage = `ERROR ON LOGIN - ${error}`;
+      const errorMessage = `ERROR GET USER BY DOCUMENT - ${error}`;
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }
+
+  public static async findAllUsers(token: string) {
+    try {
+      const rawResponse = await fetch(`${this.BASE_URL}/all`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: token,
+        },
+      });
+
+      const response = await rawResponse.json()
+
+      return response;
+    } catch (error) {
+      const errorMessage = `ERROR ON FIND ALL USERS - ${error}`;
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
@@ -109,4 +130,47 @@ export class UserService {
       throw new Error(errorMessage);
     }
   }
+
+  public static async activeUser(document: string, token: string): Promise<User> {
+    try {
+      const rawResponse = await fetch(`${this.BASE_URL}/active/${document}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: token,
+        },
+      });
+
+      const response = await rawResponse.json()
+
+      return response;
+    } catch (error) {
+      const errorMessage = `ERROR ON LOGIN - ${error}`;
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+
+  }
+
+  public static async unactiveUser(document: string, token: string): Promise<User> {
+    try {
+      const rawResponse = await fetch(`${this.BASE_URL}/unactive/${document}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: token,
+        },
+      });
+
+      const response = await rawResponse.json()
+
+      return response;
+    } catch (error) {
+      const errorMessage = `ERROR ON LOGIN - ${error}`;
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+
+  }
+
 }
