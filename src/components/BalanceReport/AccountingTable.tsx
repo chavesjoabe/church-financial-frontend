@@ -25,7 +25,8 @@ export const AccountingTable: React.FC<Props> = ({ balances }) => {
                 Data do Lançamento
               </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Valor</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor (25%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 1 (12.5%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 2 (12.5%)</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>% Sede (11%)</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>% Ministério (4%)</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>% Apóstolo (2%)</TableCell>
@@ -43,7 +44,8 @@ export const AccountingTable: React.FC<Props> = ({ balances }) => {
                 <TableCell component='th' scope='row'>
                   R$ {balance.value.toFixed(2)}
                 </TableCell>
-                <TableCell> R$ {balance.churchLeaderPercentage.toFixed(2)}</TableCell>
+                <TableCell> R$ {balance.churchFirstLeaderPercentage.toFixed(2)}</TableCell>
+                <TableCell> R$ {balance.churchSecondLeaderPercentage.toFixed(2)}</TableCell>
                 <TableCell>R$ {balance.mainChurchPercentage.toFixed(2)}</TableCell>
                 <TableCell>R$ {balance.ministryPercentage.toFixed(2)}</TableCell>
                 <TableCell>R$ {balance.mainLeaderPercentage.toFixed(2)}</TableCell>

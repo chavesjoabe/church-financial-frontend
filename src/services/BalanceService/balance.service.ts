@@ -12,7 +12,7 @@ export type CreateBalancePayload = {
 }
 
 export class BalanceService {
-  private static BASE_URL = `${import.meta.env.API_BASE_URL}/api/balance`;
+  private static BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/balance`;
 
   public static async createBalance(payload: CreateBalancePayload, token: string) {
     try {

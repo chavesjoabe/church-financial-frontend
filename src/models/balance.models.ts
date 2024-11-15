@@ -55,7 +55,8 @@ export type AccountingReportItem = {
   balanceDate: string;
   description: string;
   incomingType: string;
-  churchLeaderPercentage: number;
+  churchFirstLeaderPercentage: number;
+  churchSecondLeaderPercentage: number;
   mainChurchPercentage: number;
   ministryPercentage: number;
   mainLeaderPercentage: number;
