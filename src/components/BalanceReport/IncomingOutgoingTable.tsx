@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Balance } from '../../models/balance.models';
 import { formatDate } from '../../helpers/date.helper';
-import { balanceDescriptionMapper, balanceStatusMapper, balanceTypeMapper, getFriendlyName } from '../../helpers/friendlyNames.helper';
+import { balanceDescriptionMapper, balanceTypeMapper, getFriendlyName } from '../../helpers/friendlyNames.helper';
 
 type Props = {
   balances: Balance[];

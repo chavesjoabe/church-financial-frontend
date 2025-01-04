@@ -7,11 +7,11 @@ export type CreateUserPayload = {
   document: string;
   role?: string;
   password: string;
-}
+};
 
 export type LoginResponse = {
   token: string;
-}
+};
 
 export class UserService {
   private static BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/user`;
@@ -21,7 +21,10 @@ export class UserService {
     return response;
   }
 
-  public static async createUser(createUserPayload: CreateUserPayload, token: string) {
+  public static async createUser(
+    createUserPayload: CreateUserPayload,
+    token: string,
+  ) {
     try {
       const rawResponse = await fetch(`${this.BASE_URL}/create`, {
         method: 'POST',
@@ -41,7 +44,10 @@ export class UserService {
     }
   }
 
-  public static async login(document: string, password: string): Promise<string | null> {
+  public static async login(
+    document: string,
+    password: string,
+  ): Promise<string | null> {
     try {
       const loginPayload = {
         document,
@@ -56,7 +62,7 @@ export class UserService {
         body: JSON.stringify(loginPayload),
       });
 
-      if(rawResponse.status === HttpStatusCode.Forbidden) {
+      if (rawResponse.status === HttpStatusCode.Forbidden) {
         console.log('error on login');
         return null;
       }
@@ -80,7 +86,7 @@ export class UserService {
         },
       });
 
-      const response = await rawResponse.json()
+      const response = await rawResponse.json();
 
       return response;
     } catch (error) {
@@ -100,7 +106,7 @@ export class UserService {
         },
       });
 
-      const response = await rawResponse.json()
+      const response = await rawResponse.json();
 
       return response;
     } catch (error) {
@@ -112,16 +118,19 @@ export class UserService {
 
   public static async update(updatePayload: CreateUserPayload, token: string) {
     try {
-      const rawResponse = await fetch(`${this.BASE_URL}/update/${updatePayload.document}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: token,
+      const rawResponse = await fetch(
+        `${this.BASE_URL}/update/${updatePayload.document}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: token,
+          },
+          body: JSON.stringify(updatePayload),
         },
-        body: JSON.stringify(updatePayload)
-      });
+      );
 
-      const response = await rawResponse.json()
+      const response = await rawResponse.json();
 
       return response;
     } catch (error) {
@@ -131,7 +140,10 @@ export class UserService {
     }
   }
 
-  public static async activeUser(document: string, token: string): Promise<User> {
+  public static async activeUser(
+    document: string,
+    token: string,
+  ): Promise<User> {
     try {
       const rawResponse = await fetch(`${this.BASE_URL}/active/${document}`, {
         method: 'PUT',
@@ -141,7 +153,7 @@ export class UserService {
         },
       });
 
-      const response = await rawResponse.json()
+      const response = await rawResponse.json();
 
       return response;
     } catch (error) {
@@ -149,10 +161,12 @@ export class UserService {
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
-
   }
 
-  public static async unactiveUser(document: string, token: string): Promise<User> {
+  public static async unactiveUser(
+    document: string,
+    token: string,
+  ): Promise<User> {
     try {
       const rawResponse = await fetch(`${this.BASE_URL}/unactive/${document}`, {
         method: 'PUT',
@@ -162,7 +176,7 @@ export class UserService {
         },
       });
 
-      const response = await rawResponse.json()
+      const response = await rawResponse.json();
 
       return response;
     } catch (error) {
@@ -170,7 +184,5 @@ export class UserService {
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
-
   }
-
 }

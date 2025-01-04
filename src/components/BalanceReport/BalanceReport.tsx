@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
-import { ChangeEvent, ReactElement, useState } from 'react';
+import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 import { AccountingReportItem, Balance } from '../../models/balance.models';
 import { BalanceService } from '../../services/BalanceService/balance.service';
 import { useAuth } from '../../context/LoginContext';
@@ -20,9 +20,12 @@ import { ReportTypes } from '../../constants/report.types';
 import { IncomingOutgoingTable } from './IncomingOutgoingTable';
 import { AccountingTable } from './AccountingTable';
 import { getFriendlyName, reportTypesMapper } from '../../helpers/friendlyNames.helper';
+import { TaxService } from '../../services/TaxService/tax.service';
+import { Tax } from '../../models/tax.models';
 
 export const BalanceReport: React.FC = () => {
   const [balances, setBalances] = useState<Balance[] | AccountingReportItem>([]);
+  const [tax, setTax] = useState<Tax>();
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,12 +34,21 @@ export const BalanceReport: React.FC = () => {
   const { getToken } = useAuth();
   const token = getToken() || '';
 
+  useEffect(() => {
+    const getTaxes = async () => {
+      const fetchTaxes = await TaxService.getTaxes(token);
+      setTax(fetchTaxes);
+    }
+
+    getTaxes();
+  }, []);
+
   const renderTable = (type: string) => {
     const tableMapper: Record<string, ReactElement> = {
       incoming: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       incoming_outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
-      accounting: (<AccountingTable balances={balances as unknown as AccountingReportItem[]} />),
+      accounting: (<AccountingTable balances={balances as unknown as AccountingReportItem[]} tax={tax as Tax} />),
     }
 
     return tableMapper[type];

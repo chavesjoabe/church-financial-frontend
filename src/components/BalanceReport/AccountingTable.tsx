@@ -9,12 +9,14 @@ import {
 } from '@mui/material';
 import { formatDate } from '../../helpers/date.helper';
 import { AccountingReportItem } from '../../models/balance.models';
+import { Tax } from '../../models/tax.models';
 
 type Props = {
   balances: AccountingReportItem[];
+  tax: Tax;
 }
 
-export const AccountingTable: React.FC<Props> = ({ balances }) => {
+export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
   return (
     <Card elevation={24} sx={{ marginTop: '20px' }}>
       <TableContainer>
@@ -25,11 +27,11 @@ export const AccountingTable: React.FC<Props> = ({ balances }) => {
                 Data do Lançamento
               </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Valor</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 1 (12.5%)</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 2 (12.5%)</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Sede (11%)</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Ministério (4%)</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>% Apóstolo (2%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 1 ({tax.firstLeaderPercentage * 100}%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Pastor 2 ({tax.secondLeaderPercentage * 100}%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Sede ({tax.mainChurchPercentage * 100}%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Ministério ({tax.ministryPercentage * 100}%)</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>% Apóstolo ({tax.mainLeaderPercentage * 100}%)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

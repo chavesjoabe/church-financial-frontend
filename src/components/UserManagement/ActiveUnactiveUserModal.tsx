@@ -45,8 +45,6 @@ export const ActiveUnactiveUserModal: React.FC<Props> = ({
     p: 4,
   };
 
-
-
   return (
     <Modal
       open={open}
@@ -56,20 +54,17 @@ export const ActiveUnactiveUserModal: React.FC<Props> = ({
     >
       <Box sx={modalStyle}>
         <Typography id='modal-modal-title' variant='h5' component='h2'>
-          Tem certeza que deseja {modalType == 'active' ? 'Ativar' : 'Inativar'} o usuário abaixo?
+          Tem certeza que deseja {modalType == 'active' ? 'Ativar' : 'Inativar'}{' '}
+          o usuário abaixo?
         </Typography>
         <TableContainer component={Paper} sx={{ marginTop: '20px' }}>
           <Table sx={{ minWidth: 650 }} aria-label='simple table'>
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }}>Nome</TableCell>
-                   <TableCell sx={{ fontWeight: 'bold' }}>Documento</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }}>
-                  Função
-                </TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }}>
-                  Status
-                </TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Documento</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Função</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -80,11 +75,13 @@ export const ActiveUnactiveUserModal: React.FC<Props> = ({
                 <TableCell component='th' scope='row'>
                   {user ? user.name : ''}
                 </TableCell>
-                    <TableCell component='th' scope='row'>
-                      {user ? user.document : ''}
-                    </TableCell>
+                <TableCell component='th' scope='row'>
+                  {user ? user.document : ''}
+                </TableCell>
                 <TableCell>{user ? user.role : ''}</TableCell>
-                <TableCell>{user ? (user.isActive ? 'ATIVO' : 'INATIVO') : ''}</TableCell>
+                <TableCell>
+                  {user ? (user.isActive ? 'ATIVO' : 'INATIVO') : ''}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -108,12 +105,18 @@ export const ActiveUnactiveUserModal: React.FC<Props> = ({
             disabled={loading}
             variant='contained'
             sx={{ marginTop: '20px' }}
-            onClick={() => modalType == 'active' ? handleOnClickActive(user.document) : handleOnClickUnactive(user.document)}
+            onClick={() =>
+              modalType == 'active'
+                ? handleOnClickActive(user.document)
+                : handleOnClickUnactive(user.document)
+            }
           >
             {loading ? (
               <CircularProgress size='20px' />
+            ) : modalType == 'active' ? (
+              'Ativar'
             ) : (
-              modalType == 'active' ? 'Ativar' : 'Inativar'
+              'Inativar'
             )}
           </Button>
         </Box>
