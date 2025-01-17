@@ -160,7 +160,7 @@ export const BalanceReport: React.FC = () => {
           </Box>
         </CardContent>
       </Card>
-      {balances.length > 0 && renderTable(type)}
+      {Array.isArray(balances) && balances.length > 0 && renderTable(type!)}
     </Box>
   );
 };

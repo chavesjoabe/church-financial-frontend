@@ -154,7 +154,7 @@ export const UserManagement: React.FC = () => {
             loading={loading}
             handleOnClickActive={handleOnClickActive}
             handleOnClickUnactive={handleOnClickUnactive}
-            modalType={modalType}
+            modalType={modalType as "active" | "unactive" | null }
           />
         </CardContent>
       </Card>

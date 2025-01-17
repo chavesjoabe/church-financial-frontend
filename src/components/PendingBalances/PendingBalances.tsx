@@ -45,7 +45,7 @@ export const PendingBalances: React.FC = () => {
   useEffect(() => {
     const fetchBalances = async () => {
       const response = await BalanceService.getAllPendingBalances(token);
-      setBalances(response);
+      setBalances(response!);
     };
 
     fetchBalances();
@@ -177,7 +177,7 @@ export const PendingBalances: React.FC = () => {
             loading={loading}
             handleOnClickApprove={handleOnClickApprove}
             handleOnClickRemove={handleOnClickRemove}
-            modalType={modalType}
+            modalType={modalType as "approve" | "reject" | null }
           />
         </CardContent>
       </Card>

@@ -33,8 +33,8 @@ export const CreateUser: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [role, setRole] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [userAlreadyExists, setUserAlreadyExists] = useState<boolean>(false);
+  const [loading] = useState<boolean>(false);
+  const [userAlreadyExists] = useState<boolean>(false);
   const navigate = useNavigate();
   const { getToken } = useAuth();
 

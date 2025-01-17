@@ -224,7 +224,7 @@ export const IncomingOutgoingCard: React.FC<Props> = ({ type }) => {
       </Card>
       <IncomingOutgoingModal
         balanceEntryValue={balanceEntryValue ?? 0}
-        balanceEntryDay={formatDate.format(new Date(balanceEntryDay))}
+        balanceEntryDay={formatDate.format(new Date(balanceEntryDay as unknown as string))}
         description={description}
         type={type}
         handleClose={handleClose}

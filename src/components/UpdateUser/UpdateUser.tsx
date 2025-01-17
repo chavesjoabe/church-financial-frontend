@@ -59,6 +59,7 @@ export const UpdateUser: React.FC = () => {
         email: email,
         password: password,
       };
+      console.log(loading);
 
       await UserService.update(updateUserPayload, token!);
       navigate(UrlConstants.HOME);

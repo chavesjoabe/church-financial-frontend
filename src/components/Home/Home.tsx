@@ -43,6 +43,7 @@ export const Home: React.FC = () => {
   const user = getLoggedUser();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event.target);
     setValue(newValue);
   };
 
