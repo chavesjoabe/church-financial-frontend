@@ -63,9 +63,7 @@ export const HomeCard: React.FC = () => {
             Portal para lançamento dos dízimos, ofertas e contribuições dos cultos.
           </Typography>
           <Grid container spacing={3} marginTop='20px'>
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <
                 GridItem
                 icon={AttachMoneyIcon}
@@ -73,7 +71,7 @@ export const HomeCard: React.FC = () => {
                 subtitle='Para lançar uma nova entrada clique na aba ENTRADA DE VALORES e preencha os campos do formulário'
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <
                 GridItem
                 icon={MoneyOffIcon}
@@ -81,11 +79,7 @@ export const HomeCard: React.FC = () => {
 
                 subtitle='Para lançar uma nova entrada clique na aba SAÍDA DE VALORES e preencha os campos do formulário' />
             </Grid>
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <
                 GridItem
                 icon={PersonIcon}
@@ -93,15 +87,13 @@ export const HomeCard: React.FC = () => {
                 subtitle='É possível criar novos usuários para compor a equipe de tesouraria'
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <
                 GridItem
                 icon={SummarizeIcon}
                 title='Extração de relatórios'
 
                 subtitle='É possível extrair relatórios de acordo com o período solicitado' />
-            </Grid>
-            <Grid item xs={2}>
             </Grid>
           </Grid>
         </CardContent>

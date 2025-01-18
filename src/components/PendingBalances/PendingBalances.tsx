@@ -97,8 +97,8 @@ export const PendingBalances: React.FC = () => {
   }
 
   return (
-    <Box width='100%' height='100%'>
-      <Card>
+    <Box width='100%' height='100%' marginTop='50px'>
+      <Card elevation={24}>
         <CardHeader title='Lançamentos Pendentes' />
         <CardContent>
           <TableContainer component={Paper}>
