@@ -19,7 +19,7 @@ import { BalanceService, CreateBalancePayload } from '../../services/BalanceServ
 import { useNavigate } from "react-router-dom";
 import { UrlConstants } from "../../constants/url.contants";
 import { useAuth } from "../../context/LoginContext";
-import { BalanceDescriptions, BalanceDescriptionsEnum, BalanceIncomingTypes, BalanceTypes } from "../../models/balance.models";
+import { BalanceDescriptions, BalanceIncomingTypes, BalanceTypes } from "../../models/balance.models";
 import { formatDate } from "../../helpers/date.helper";
 import { IncomingOutgoingModal } from "./IncomingOutgoingModal";
 import { balanceDescriptionMapper, getFriendlyName, incomingTypeMapper } from "../../helpers/friendlyNames.helper";
@@ -92,6 +92,14 @@ export const IncomingOutgoingCard: React.FC<Props> = ({ type }) => {
 
   }
 
+  const handleOnChangeDate = (newValue: Dayjs | null) => {
+    if (newValue) {
+      setBalanceEntryDay(newValue); // Valid Day.js object
+    } else {
+      setBalanceEntryDay(null); // Handle invalid or cleared input
+    }
+  }
+
   const getTypeFriendlyName = (type: string) => {
     const typeNameMapper: Record<string, string> = {
       incoming: 'Entrada de valores',
@@ -134,7 +142,12 @@ export const IncomingOutgoingCard: React.FC<Props> = ({ type }) => {
             <
               DatePicker
               value={balanceEntryDay}
-              onChange={(newValue) => setBalanceEntryDay(newValue)}
+              onChange={handleOnChangeDate}
+              slotProps={{
+                textField: {
+                  helperText: 'Enter a date or use the calendar picker',
+                },
+              }}
             />
           </FormControl>
           {
@@ -183,20 +196,16 @@ export const IncomingOutgoingCard: React.FC<Props> = ({ type }) => {
               </MenuItem>
             ))}
           </TextField>
-          {
-            description === BalanceDescriptionsEnum.OTHER
-              ? <FormControl fullWidth sx={{ marginTop: '20px' }} >
-                <InputLabel htmlFor="free-description">Descrição Livre</InputLabel>
-                <OutlinedInput
-                  id="free-description"
-                  label="freeDescription"
-                  required
-                  value={freeDescription}
-                  onChange={(e) => setFreeDescription(e.target.value)}
-                />
-              </FormControl>
-              : ''
-          }
+          <FormControl fullWidth sx={{ marginTop: '20px' }} >
+            <InputLabel htmlFor="free-description">Descrição Livre</InputLabel>
+            <OutlinedInput
+              id="free-description"
+              label="freeDescription"
+              required
+              value={freeDescription}
+              onChange={(e) => setFreeDescription(e.target.value)}
+            />
+          </FormControl>
           <Box
             display='flex'
             justifyContent='space-between'

@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useTheme,
 } from '@mui/material';
 import { formatDate } from '../../helpers/date.helper';
 import { AccountingReportItem } from '../../models/balance.models';
@@ -17,6 +18,9 @@ type Props = {
 }
 
 export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
+  const theme = useTheme();
+  const totalTableRowStyle = { color: '#FFF', fontWeight: 'bold'};
+
   return (
     <Card elevation={24} sx={{ marginTop: '20px' }}>
       <TableContainer>
@@ -53,6 +57,15 @@ export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
                 <TableCell>R$ {balance.mainLeaderPercentage.toFixed(2)}</TableCell>
               </TableRow>
             ))}
+            <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
+              <TableCell sx={totalTableRowStyle}>TOTAL</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.value, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.churchFirstLeaderPercentage, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.churchSecondLeaderPercentage, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.mainChurchPercentage, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.ministryPercentage, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.mainLeaderPercentage, 0).toFixed(2)}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
