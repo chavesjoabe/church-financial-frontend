@@ -67,7 +67,7 @@ export const IncomingOutgoingTable: React.FC<Props> = ({ balances }) => {
               </TableRow>
             ))}
             <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
-            <TableCell colSpan={4} sx={totalTableRowStyle}>
+            <TableCell colSpan={5} sx={totalTableRowStyle}>
               TOTAL
             </TableCell>
             <TableCell sx={totalTableRowStyle}>
