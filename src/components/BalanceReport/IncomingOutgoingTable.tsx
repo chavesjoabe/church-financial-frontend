@@ -33,6 +33,7 @@ export const IncomingOutgoingTable: React.FC<Props> = ({ balances }) => {
                 Data do Lançamento
               </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Tipo</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Forma de pagamento</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Descrição</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Responsável</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Valor</TableCell>
@@ -55,6 +56,9 @@ export const IncomingOutgoingTable: React.FC<Props> = ({ balances }) => {
                     balance.description,
                     balanceDescriptionMapper,
                   )}
+                </TableCell>
+                <TableCell>
+                  {balance.freeDescription}
                 </TableCell>
                 <TableCell>{balance.responsible}</TableCell>
                 <TableCell component='th' scope='row'>

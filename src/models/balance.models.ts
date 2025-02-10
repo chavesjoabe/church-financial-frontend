@@ -9,6 +9,7 @@ export type Balance = {
   balanceDate: string;
   description: string;
   incomingType: string;
+  freeDescription: string;
 }
 
 export const BalanceTypes = {
