@@ -9,15 +9,15 @@ import {
   useTheme,
 } from '@mui/material';
 import { formatDate } from '../../helpers/date.helper';
-import { AccountingReportItem } from '../../models/balance.models';
+import { AccountingReportResponseV2 } from '../../models/balance.models';
 import { Tax } from '../../models/tax.models';
 
 type Props = {
-  balances: AccountingReportItem[];
+  data: AccountingReportResponseV2;
   tax: Tax;
 }
 
-export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
+export const AccountingTable: React.FC<Props> = ({ tax, data }) => {
   const theme = useTheme();
   const totalTableRowStyle = { color: '#FFF', fontWeight: 'bold'};
 
@@ -39,7 +39,7 @@ export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {balances.map((balance) => (
+            {data.balances.map((balance) => (
               <TableRow
                 key={balance.balanceId}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -59,12 +59,12 @@ export const AccountingTable: React.FC<Props> = ({ balances, tax }) => {
             ))}
             <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
               <TableCell sx={totalTableRowStyle}>TOTAL</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.value, 0).toFixed(2)}</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.churchFirstLeaderPercentage, 0).toFixed(2)}</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.churchSecondLeaderPercentage, 0).toFixed(2)}</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.mainChurchPercentage, 0).toFixed(2)}</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.ministryPercentage, 0).toFixed(2)}</TableCell>
-              <TableCell sx={totalTableRowStyle}>R$ {balances.reduce((acc, curr) => acc += curr.mainLeaderPercentage, 0).toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.total.toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.churchFirstLeaderPercentageTotal.toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.churchSecondLeaderPercentageTotal.toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.mainChurchPercentageTotal.toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.ministryPercentageTotal.toFixed(2)}</TableCell>
+              <TableCell sx={totalTableRowStyle}>R$ {data.mainLeaderPercentageTotal.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

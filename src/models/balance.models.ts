@@ -62,3 +62,13 @@ export type AccountingReportItem = {
   ministryPercentage: number;
   mainLeaderPercentage: number;
 }
+
+export type AccountingReportResponseV2 = {
+  balances: AccountingReportItem[];
+  churchFirstLeaderPercentageTotal: number;
+  churchSecondLeaderPercentageTotal: number;
+  mainChurchPercentageTotal: number;
+  ministryPercentageTotal: number;
+  mainLeaderPercentageTotal: number;
+  total: number;
+}

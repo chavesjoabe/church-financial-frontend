@@ -13,7 +13,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
 import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
-import { AccountingReportItem, Balance } from '../../models/balance.models';
+import { AccountingReportItem, AccountingReportResponseV2, Balance } from '../../models/balance.models';
 import { BalanceService } from '../../services/BalanceService/balance.service';
 import { useAuth } from '../../context/LoginContext';
 import { ReportTypes } from '../../constants/report.types';
@@ -25,6 +25,7 @@ import { Tax } from '../../models/tax.models';
 
 export const BalanceReport: React.FC = () => {
   const [balances, setBalances] = useState<Balance[] | AccountingReportItem>([]);
+  const [reportData, setReportData] = useState<AccountingReportResponseV2 | null>(null);
   const [tax, setTax] = useState<Tax>();
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
@@ -48,7 +49,7 @@ export const BalanceReport: React.FC = () => {
       incoming: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       incoming_outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
-      accounting: (<AccountingTable balances={balances as unknown as AccountingReportItem[]} tax={tax as Tax} />),
+      accounting: (<AccountingTable data={reportData!} tax={tax as Tax} />),
     }
 
     return tableMapper[type];
@@ -68,6 +69,12 @@ export const BalanceReport: React.FC = () => {
         type,
         token,
       );
+
+      if (type === ReportTypes.ACCOUNTING) {
+        setReportData(response);
+        console.log(reportData);
+        return;
+      }
       setBalances(response);
     } catch (error) {
       const errorMessage = `ERROR ON GET BALANCES BY DATE - ${error}`;
@@ -161,6 +168,7 @@ export const BalanceReport: React.FC = () => {
         </CardContent>
       </Card>
       {Array.isArray(balances) && balances.length > 0 && renderTable(type!)}
+      {reportData && renderTable(type!)}
     </Box>
   );
 };
