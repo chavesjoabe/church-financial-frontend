@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CircularProgress,
   FilledInput,
   FormControl,
   InputLabel,
@@ -155,11 +156,17 @@ export const UpdateTaxes: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          <Button onClick={handleOnClickReset} variant='outlined' color='error'>
-            Resetar valores
+          <Button onClick={handleOnClickReset} variant='outlined' color='error' disabled={loading}>
+            {loading 
+              ? <CircularProgress size={20} color='inherit' />
+              : 'Resetar valores'
+            }
           </Button>
-          <Button onClick={handleOnSubmit} variant='contained' color='primary'>
-            Atualizar
+          <Button onClick={handleOnSubmit} variant='contained' color='primary' disabled={loading}>
+            {loading
+              ? <CircularProgress size={20} color='inherit' />
+              : 'Atualizar'
+            }
           </Button>
         </CardActions>
       </Card>
