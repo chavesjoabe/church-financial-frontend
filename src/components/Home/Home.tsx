@@ -7,6 +7,8 @@ import { useAuth } from '../../context/LoginContext';
 import { PendingBalances } from '../PendingBalances/PendingBalances';
 import { BalanceReport } from '../BalanceReport/BalanceReport';
 import { UserManagement } from '../UserManagement/UserManagement';
+import { UserRoles } from '../../constants/user.roles';
+import { UpdateTaxes } from '../UpdateTaxes/UpdateTaxes';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,14 +65,17 @@ export const Home: React.FC = () => {
           <Tab label='Entrada de valores' {...a11yProps(1)} />
           <Tab label='Saída de valores' {...a11yProps(2)} />
           <Tab label='Lançamentos Pendentes' {...a11yProps(3)} />
-          {user?.role === 'ADMIN' && (
+          {user?.role === UserRoles.ADMIN && (
             <Tab label='Extração de relatório' {...a11yProps(5)} />
           )}
-          {user?.role === 'ADMIN' && (
+          {user?.role === UserRoles.ADMIN && (
             <Tab label='Criação de usuários' {...a11yProps(4)} />
           )}
-          {user?.role === 'ADMIN' && (
+          {user?.role === UserRoles.ADMIN && (
             <Tab label='Gerenciamento de usuários' {...a11yProps(5)} />
+          )}
+          {user?.role === UserRoles.ADMIN && (
+            <Tab label='Autalização de porcentagens' {...a11yProps(6)} />
           )}
         </Tabs>
       </Box>
@@ -86,23 +91,30 @@ export const Home: React.FC = () => {
       <CustomTabPanel value={value} index={3}>
         <PendingBalances />
       </CustomTabPanel>
-      {user?.role === 'ADMIN' ? (
+      {user?.role === UserRoles.ADMIN ? (
         <CustomTabPanel value={value} index={4}>
           <BalanceReport />
         </CustomTabPanel>
       ) : (
         ''
       )}
-      {user?.role === 'ADMIN' ? (
+      {user?.role === UserRoles.ADMIN ? (
         <CustomTabPanel value={value} index={5}>
           <CreateUser />
         </CustomTabPanel>
       ) : (
         ''
       )}
-      {user?.role === 'ADMIN' ? (
+      {user?.role === UserRoles.ADMIN ? (
         <CustomTabPanel value={value} index={6}>
           <UserManagement />
+        </CustomTabPanel>
+      ) : (
+        ''
+      )}
+      {user?.role === UserRoles.ADMIN ? (
+        <CustomTabPanel value={value} index={7}>
+          <UpdateTaxes />
         </CustomTabPanel>
       ) : (
         ''

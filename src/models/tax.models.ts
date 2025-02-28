@@ -1,10 +1,10 @@
 export type Tax = {
-  id: string;
+  id?: string;
   firstLeaderPercentage: number;
   secondLeaderPercentage: number;
   mainChurchPercentage: number;
   ministryPercentage: number;
   mainLeaderPercentage: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
