@@ -22,6 +22,7 @@ import { AccountingTable } from './AccountingTable';
 import { getFriendlyName, reportTypesMapper } from '../../helpers/friendlyNames.helper';
 import { TaxService } from '../../services/TaxService/tax.service';
 import { Tax } from '../../models/tax.models';
+import { OutgoingChart } from './OutgoingChart';
 
 export const BalanceReport: React.FC = () => {
   const [balances, setBalances] = useState<Balance[] | AccountingReportItem>([]);
@@ -50,6 +51,7 @@ export const BalanceReport: React.FC = () => {
       outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       incoming_outgoing: (<IncomingOutgoingTable balances={balances as Balance[]} />),
       accounting: (<AccountingTable data={reportData!} tax={tax as Tax} />),
+      outgoing_chart: (<OutgoingChart balances={balances as Balance[]} />),
     }
 
     return tableMapper[type];

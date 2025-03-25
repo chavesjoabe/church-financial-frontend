@@ -27,8 +27,9 @@ export const reportTypesMapper: Record<string, string> = {
   outgoing: 'Saídas',
   incoming_outgoing: 'Entradas e Saídas',
   accounting: 'Contábil',
+  outgoing_chart: 'Gráfico de Saídas',
 };
 
-export const getFriendlyName = ( name: string, nameMapper: Record<string, string>) => {
+export const getFriendlyName = (name: string, nameMapper: Record<string, string>) => {
   return nameMapper[name];
 };
