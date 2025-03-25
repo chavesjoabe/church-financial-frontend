@@ -3,4 +3,5 @@ export const ReportTypes: Record<string, string> = {
   OUTGOING: 'outgoing',
   INCOMING_OUTGOING: 'incoming_outgoing',
   ACCOUNTING: 'accounting',
+  OUTGOING_CHART: 'outgoing_chart',
 }

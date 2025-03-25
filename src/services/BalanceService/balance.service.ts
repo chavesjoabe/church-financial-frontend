@@ -99,6 +99,10 @@ export class BalanceService {
 
   public static async extractReport(startDate: Dayjs, endDate: Dayjs, type: string, token: string) {
     try {
+      if (type === 'outgoing_chart') {
+        type = 'outgoing';
+      }
+
       const rawResponse = await fetch(`${this.BASE_URL}/report/${type}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`, {
         method: 'GET',
         headers: {
