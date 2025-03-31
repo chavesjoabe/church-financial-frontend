@@ -45,11 +45,9 @@ export const Home: React.FC = () => {
   const user = getLoggedUser();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    console.log(event.target);
+    console.log(event?.target);
     setValue(newValue);
   };
-
-  console.log(user);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -80,7 +78,7 @@ export const Home: React.FC = () => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <HomeCard />
+        <HomeCard handleChange={handleChange} userRole={user?.role!!} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <IncomingOutgoingCard type='incoming' />
