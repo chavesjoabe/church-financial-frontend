@@ -18,13 +18,13 @@ export const BalanceTypes = {
 }
 
 export enum BalanceDescriptionsEnum {
- MONEY = 'MONEY',
- CARD = 'CARD',
- PIX = 'PIX',
- TRADE = 'TRADE',
- FOOD = 'FOOD',
- PAYMENT = 'PAYMENT',
- OTHER = 'OTHER',
+  MONEY = 'MONEY',
+  CARD = 'CARD',
+  PIX = 'PIX',
+  TRADE = 'TRADE',
+  FOOD = 'FOOD',
+  PAYMENT = 'PAYMENT',
+  OTHER = 'OTHER',
 }
 
 export const BalanceDescriptions: Record<string, string[]> = {
@@ -39,6 +39,9 @@ export const BalanceDescriptions: Record<string, string[]> = {
     'FOOD',
     'PAYMENT',
     'OTHER',
+    'CHILDREN_DEPT_FOOD',
+    'MISSIONARY_OFFERING',
+    'EMPLOYEE_PAYMENT',
   ],
 }
 

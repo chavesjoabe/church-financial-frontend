@@ -18,7 +18,7 @@ export const OutgoingChart: React.FC<Props> = ({ balances }) => {
     return {
       type: label,
       size: data.length,
-      totalValue: data.reduce((acc, curr) => acc += curr.value, 0),
+      totalValue: data.reduce((acc: number, curr: Balance): number => acc += curr.value, 0),
       data,
     }
   });
@@ -38,12 +38,14 @@ export const OutgoingChart: React.FC<Props> = ({ balances }) => {
         alignItems: 'center',
         justifyContent: 'center',
         overflowX: 'auto',
+        padding: '20px',
       }}>
       <BarChart
         xAxis={[{ scaleType: 'band', data: labels }]}
         series={[{ data: groupedBalances.map(item => item.totalValue) }]}
-        width={500}
+        width={600}
         height={300}
+        barLabel="value"
       />
       <Typography>
         Total de saídas: R$ {outgoingTotal}
