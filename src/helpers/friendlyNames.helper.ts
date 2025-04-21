@@ -12,8 +12,11 @@ export const balanceDescriptionMapper: Record<string, string> = {
   CARD: 'Cartão',
   PIX: 'Pix',
   FOOD: 'Alimentação',
+  CHILDREN_DEPT_FOOD: 'Alimentação departamento infantíl',
   TRADE: 'Troco',
   PAYMENT: 'Pagamento',
+  MISSIONARY_OFFERING: 'Oferta missionária',
+  EMPLOYEE_PAYMENT: 'Pagamento funcionário',
   OTHER: 'Outros',
 };
 
