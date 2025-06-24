@@ -46,9 +46,13 @@ export const BalanceDescriptions: Record<string, string[]> = {
 }
 
 export const BalanceIncomingTypes = {
+  NON_OFICIAL: 'NON_OFICIAL',
   OFICIAL: 'OFICIAL',
-  NON_OFICIAL: 'NON_OFICIAL'
-}
+  TRANSFER: 'TRANSFER',
+  TRANSFER_GEOL: 'TRANSFER_GEOL',
+} as const;
+
+export type BalanceIncomingType = typeof BalanceIncomingTypes[keyof typeof BalanceIncomingTypes]
 
 export type AccountingReportItem = {
   balanceId: string;
@@ -66,12 +70,21 @@ export type AccountingReportItem = {
   mainLeaderPercentage: number;
 }
 
+export type TotalObject = {
+  churchFirstLeaderPercentage: number;
+  churchSecondLeaderPercentage: number;
+  mainChurchPercentage: number;
+  ministryPercentage: number;
+  mainLeaderPercentage: number;
+  total: number;
+}
+
 export type AccountingReportResponseV2 = {
   balances: AccountingReportItem[];
-  churchFirstLeaderPercentageTotal: number;
-  churchSecondLeaderPercentageTotal: number;
-  mainChurchPercentageTotal: number;
-  ministryPercentageTotal: number;
-  mainLeaderPercentageTotal: number;
-  total: number;
+  balancesTotal: TotalObject;
+  transferBalances: AccountingReportItem[];
+  transferBalancesTotal: TotalObject;
+  transferGeolBalances: AccountingReportItem[];
+  transferGeolBalancesTotal: TotalObject;
+  nonOficialBalances: Balance[];
 }

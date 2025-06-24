@@ -73,7 +73,7 @@ export const Home: React.FC = () => {
             <Tab label='Gerenciamento de usuários' {...a11yProps(5)} />
           )}
           {user?.role === UserRoles.ADMIN && (
-            <Tab label='Autalização de porcentagens' {...a11yProps(6)} />
+            <Tab label='Atualização de porcentagens' {...a11yProps(6)} />
           )}
         </Tabs>
       </Box>

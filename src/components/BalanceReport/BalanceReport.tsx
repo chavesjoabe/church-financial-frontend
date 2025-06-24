@@ -67,7 +67,7 @@ export const BalanceReport: React.FC = () => {
 
       const response = await BalanceService.extractReport(
         startDate,
-        endDate,
+        endDate.add(20, 'hours'), // to get the entire day
         type,
         token,
       );

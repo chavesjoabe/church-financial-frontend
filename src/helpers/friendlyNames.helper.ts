@@ -1,3 +1,5 @@
+import { BalanceIncomingType } from "../models/balance.models";
+
 export const balanceTypeMapper: Record<string, string> = {
   INCOMING: 'Entrada',
   OUTGOING: 'Saída',
@@ -20,9 +22,11 @@ export const balanceDescriptionMapper: Record<string, string> = {
   OTHER: 'Outros',
 };
 
-export const incomingTypeMapper: Record<string, string> = {
+export const incomingTypeMapper: Record<BalanceIncomingType, string> = {
   OFICIAL: 'Oficial',
   NON_OFICIAL: 'Não Oficial',
+  TRANSFER: "Repasse - Aliança",
+  TRANSFER_GEOL: "Repasse - GEOL",
 };
 
 export const reportTypesMapper: Record<string, string> = {

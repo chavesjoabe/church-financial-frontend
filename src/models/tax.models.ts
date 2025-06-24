@@ -5,6 +5,8 @@ export type Tax = {
   mainChurchPercentage: number;
   ministryPercentage: number;
   mainLeaderPercentage: number;
+  transferMainLeaderPercentage: number;
+  transferMainChurchPercentage: number;
   createdAt?: string;
   updatedAt?: string;
 }

@@ -82,14 +82,12 @@ export const IncomingOutgoingCard: React.FC<Props> = ({ type }) => {
 
       const createBalanceResponse = await BalanceService.createBalance(balancePayload, token);
       return navigate(UrlConstants.BALANCE_SUCCESS, { state: createBalanceResponse });
-
     } catch (error) {
       const errorMessage = `ERROR ON CREATE BALANCE - ${error}`;
       window.alert(errorMessage);
     } finally {
       setLoading(false);
     }
-
   }
 
   const handleOnChangeDate = (newValue: Dayjs | null) => {

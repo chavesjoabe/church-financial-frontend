@@ -5,9 +5,9 @@ import {
   CardActions,
   CardContent,
   CircularProgress,
-  FilledInput,
   FormControl,
   InputLabel,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -24,6 +24,8 @@ export const UpdateTaxes: React.FC = () => {
   const [mainChurchPercentage, setMainChurchPercentage] = useState<number | null>(null);
   const [ministryPercentage, setMinistryPercentage] = useState<number | null>(null);
   const [mainLeaderPercentage, setMainLeaderPercentage] = useState<number | null>(null);
+  const [transferMainLeaderPercentage, setTransferMainLeaderPercentage] = useState<number | null>(null);
+  const [transferMainChurchPercentage, setTransferMainChurchPercentage] = useState<number | null>(null);
   const [taxes, setTaxes] = useState<Tax | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,6 +38,8 @@ export const UpdateTaxes: React.FC = () => {
     setMainChurchPercentage(taxes!.mainChurchPercentage * 100);
     setMinistryPercentage(taxes!.ministryPercentage * 100);
     setMainLeaderPercentage(taxes!.mainLeaderPercentage * 100);
+    setTransferMainLeaderPercentage(taxes!.transferMainLeaderPercentage * 100);
+    setTransferMainChurchPercentage(taxes!.transferMainChurchPercentage * 100);
   }
 
   useEffect(() => {
@@ -48,6 +52,8 @@ export const UpdateTaxes: React.FC = () => {
       setMainChurchPercentage(taxes.mainChurchPercentage * 100);
       setMinistryPercentage(taxes.ministryPercentage * 100);
       setMainLeaderPercentage(taxes.mainLeaderPercentage * 100);
+      setTransferMainLeaderPercentage(taxes.transferMainLeaderPercentage * 100);
+      setTransferMainChurchPercentage(taxes.transferMainChurchPercentage * 100);
     }
 
     fetchTaxes();
@@ -62,6 +68,8 @@ export const UpdateTaxes: React.FC = () => {
         mainChurchPercentage: mainChurchPercentage! / 100,
         ministryPercentage: ministryPercentage! / 100,
         mainLeaderPercentage: mainLeaderPercentage! / 100,
+        transferMainLeaderPercentage: transferMainLeaderPercentage! / 100,
+        transferMainChurchPercentage: transferMainChurchPercentage! / 100,
       }
 
       await TaxService.updateTaxes(requestBody, token!);
@@ -96,56 +104,87 @@ export const UpdateTaxes: React.FC = () => {
           <Typography variant='h6'>Atualização de taxas e porcentagens</Typography>
           <Typography variant='body1'>Todos os valores são em porcentagem</Typography>
           <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
+            {/**
             <InputLabel htmlFor="outlined-adornment-church-leader-1">Pastor Local 1 (%)</InputLabel>
-            <FilledInput
+            **/}
+            <TextField
+              label="Pastor Local 1 (%)"
               required
-              id="outlined-adornment-church-leader-1"
               onChange={(event) => setFirstLeaderPercentage(Number(event.target.value))}
               value={firstLeaderPercentage}
+              variant="filled"
               type="number"
               inputProps={{ max: 100, min: 1 }}
             />
           </FormControl>
           <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-church-leader-2">Pastor Local 2 (%)</InputLabel>
-            <FilledInput
+            <TextField
+              label='Pastor Local 2 (%)'
               required
               id="outlined-adornment-church-leader-2"
               onChange={(event) => setSecondLeaderPercentage(Number(event.target.value))}
-              value={firstLeaderPercentage}
+              variant="filled"
+              value={secondLeaderPercentage}
               type="number"
               inputProps={{ max: 100, min: 1 }}
             />
           </FormControl>
           <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-main-church">Sede (%)</InputLabel>
-            <FilledInput
+            <InputLabel htmlFor="outlined-adornment-main-church"></InputLabel>
+            <TextField
+              label='Sede (%)'
               required
-              id="outlined-adornment-main-church"
               onChange={(event) => setMainChurchPercentage(Number(event.target.value))}
+              variant="filled"
               value={mainChurchPercentage}
               type="number"
               inputProps={{ max: 100, min: 1 }}
             />
           </FormControl>
           <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-ministry">Ministério (%)</InputLabel>
-            <FilledInput
+            <InputLabel htmlFor="outlined-adornment-ministry"></InputLabel>
+            <TextField
+              label='Ministério (%)'
               required
-              id="outlined-adornment-ministry"
               onChange={(event) => setMinistryPercentage(Number(event.target.value))}
+              variant="filled"
               value={ministryPercentage}
               type="number"
               inputProps={{ max: 100, min: 1 }}
             />
           </FormControl>
           <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-main-leader">Apóstolo (%)</InputLabel>
-            <FilledInput
+            <InputLabel htmlFor="outlined-adornment-main-leader"></InputLabel>
+            <TextField
+              label='Apóstolo (%)'
               required
-              id="outlined-adornment-main-leader"
               onChange={(event) => setMainLeaderPercentage(Number(event.target.value))}
+              variant="filled"
               value={mainLeaderPercentage}
+              type="number"
+              inputProps={{ max: 100, min: 1 }}
+            />
+          </FormControl>
+          <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
+            <TextField
+              label='Líder de Repasse (%)'
+              required
+              id="outlined-adornment-transfer-main-leader"
+              onChange={(event) => setTransferMainLeaderPercentage(Number(event.target.value))}
+              variant="filled"
+              value={transferMainLeaderPercentage}
+              type="number"
+              inputProps={{ max: 100, min: 1 }}
+            />
+          </FormControl>
+          <FormControl sx={{ width: '100%', marginTop: '15px' }} variant="outlined">
+            <TextField
+              label='Igreja Repasse (%)'
+              required
+              id="outlined-adornment-transfer-main-leader"
+              onChange={(event) => setTransferMainChurchPercentage(Number(event.target.value))}
+              variant="filled"
+              value={transferMainChurchPercentage}
               type="number"
               inputProps={{ max: 100, min: 1 }}
             />
@@ -157,7 +196,7 @@ export const UpdateTaxes: React.FC = () => {
           justifyContent: 'space-between',
         }}>
           <Button onClick={handleOnClickReset} variant='outlined' color='error' disabled={loading}>
-            {loading 
+            {loading
               ? <CircularProgress size={20} color='inherit' />
               : 'Resetar valores'
             }
