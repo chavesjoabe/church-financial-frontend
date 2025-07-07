@@ -14,6 +14,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { formatDate } from '../../helpers/date.helper';
 import { Balance } from '../../models/balance.models';
 import { useState } from 'react';
+import { formatCurrency } from '../../helpers/currency.helper';
 
 type Props = {
   balances: Balance[];
@@ -53,6 +54,7 @@ export const AccountingNonOficialTable: React.FC<Props> = ({ balances, type }: P
                   <TableRow>
                     <TableCell sx={{ fontWeight: 'bold' }}> Data </TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>Valor Total</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Descriçao</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -63,7 +65,8 @@ export const AccountingNonOficialTable: React.FC<Props> = ({ balances, type }: P
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell> {formatDate.format(new Date(balance.balanceDate))} </TableCell>
-                      <TableCell component='th' scope='row'> R$ {balance.value.toFixed(2)} </TableCell>
+                      <TableCell component='th' scope='row'>{formatCurrency.format(balance.value)} </TableCell>
+                      <TableCell component='th' scope='row'>{balance.freeDescription}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

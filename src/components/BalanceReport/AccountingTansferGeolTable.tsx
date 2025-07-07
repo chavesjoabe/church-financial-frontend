@@ -15,6 +15,7 @@ import { formatDate } from '../../helpers/date.helper';
 import { Tax } from '../../models/tax.models';
 import { AccountingReportItem, TotalObject } from '../../models/balance.models';
 import { useState } from 'react';
+import { formatCurrency } from '../../helpers/currency.helper';
 
 type Props = {
   balances: AccountingReportItem[];
@@ -54,6 +55,7 @@ export const AccountingTransferGeolTable: React.FC<Props> = ({ balances, total, 
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ fontWeight: 'bold' }}> Data </TableCell>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Descriçao</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>Valor Total</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>% Pastor ({(tax.firstLeaderPercentage + tax.secondLeaderPercentage) * 100}%)</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>% Sede ({tax.mainChurchPercentage * 100}%)</TableCell>
@@ -68,12 +70,13 @@ export const AccountingTransferGeolTable: React.FC<Props> = ({ balances, total, 
                       key={balance.balanceId}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell> {formatDate.format(new Date(balance.balanceDate))} </TableCell>
-                      <TableCell component='th' scope='row'> R$ {balance.value.toFixed(2)} </TableCell>
-                      <TableCell> R$ {(balance.churchFirstLeaderPercentage + balance.churchSecondLeaderPercentage).toFixed(2)}</TableCell>
-                      <TableCell>R$ {balance.mainChurchPercentage.toFixed(2)}</TableCell>
-                      <TableCell>R$ {balance.ministryPercentage.toFixed(2)}</TableCell>
-                      <TableCell>R$ {balance.mainLeaderPercentage.toFixed(2)}</TableCell>
+                      <TableCell>{formatDate.format(new Date(balance.balanceDate))} </TableCell>
+                      <TableCell>{balance.freeDescription}</TableCell>
+                      <TableCell component='th' scope='row'>{formatCurrency.format(balance.value)} </TableCell>
+                      <TableCell>{formatCurrency.format((balance.churchFirstLeaderPercentage + balance.churchSecondLeaderPercentage))}</TableCell>
+                      <TableCell>{formatCurrency.format(balance.mainChurchPercentage)}</TableCell>
+                      <TableCell>{formatCurrency.format(balance.ministryPercentage)}</TableCell>
+                      <TableCell>{formatCurrency.format(balance.mainLeaderPercentage)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

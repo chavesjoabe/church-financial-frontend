@@ -56,6 +56,7 @@ export const AccountingTransferTable: React.FC<Props> = ({ balances, total, tax,
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ fontWeight: 'bold' }}> Data </TableCell>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Descriçao</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>Valor Total</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>% Pastor igreja mãe ({tax.transferMainLeaderPercentage * 100}%)</TableCell>
                     <TableCell sx={{ fontWeight: 'bold' }}>% Igreja mãe ({tax.transferMainChurchPercentage * 100}%)</TableCell>
@@ -69,6 +70,7 @@ export const AccountingTransferTable: React.FC<Props> = ({ balances, total, tax,
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell> {formatDate.format(new Date(balance.balanceDate))} </TableCell>
+                      <TableCell>{balance.freeDescription}</TableCell>
                       <TableCell component='th' scope='row'> R$ {balance.value.toFixed(2)} </TableCell>
                       <TableCell> R$ {(balance.value * tax.transferMainLeaderPercentage).toFixed(2)}</TableCell>
                       <TableCell> R$ {(balance.value * tax.transferMainChurchPercentage).toFixed(2)}</TableCell>

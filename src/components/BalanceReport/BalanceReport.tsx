@@ -60,6 +60,8 @@ export const BalanceReport: React.FC = () => {
   const handleOnClick = async () => {
     try {
       setLoading(true);
+      setBalances([]);
+      setReportData(null);
       if (!startDate || !endDate || !type) {
         window.alert('Preencha todos os campos');
         return;

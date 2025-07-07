@@ -142,7 +142,7 @@ export const PendingBalances: React.FC = () => {
                     <TableCell>
                       {formatDate.format(new Date(balance.balanceDate))}
                     </TableCell>
-                    <TableCell>{balance.responsible}</TableCell>
+                    <TableCell>{balance.responsibleName}</TableCell>
                     <TableCell>
                       <Box>
                         <IconButton
@@ -177,7 +177,7 @@ export const PendingBalances: React.FC = () => {
             loading={loading}
             handleOnClickApprove={handleOnClickApprove}
             handleOnClickRemove={handleOnClickRemove}
-            modalType={modalType as "approve" | "reject" | null }
+            modalType={modalType as "approve" | "reject" | null}
           />
         </CardContent>
       </Card>

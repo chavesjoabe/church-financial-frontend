@@ -16,6 +16,7 @@ import { ReportTypeObject } from '../../models/report.models';
 import { AccountingTransferTable } from './AccountingTransferTable';
 import { AccountingTransferGeolTable } from './AccountingTansferGeolTable';
 import { AccountingNonOficialTable } from './AccountingNonOficialTable';
+import { formatCurrency } from '../../helpers/currency.helper';
 
 type Props = {
   data: AccountingReportResponseV2;
@@ -80,24 +81,22 @@ export const AccountingTable: React.FC<Props> = ({ data, tax }: Props) => {
                   <TableCell>
                     {formatDate.format(new Date(balance.balanceDate))}
                   </TableCell>
-                  <TableCell component='th' scope='row'>
-                    R$ {balance.value.toFixed(2)}
-                  </TableCell>
-                  <TableCell> R$ {balance.churchFirstLeaderPercentage.toFixed(2)}</TableCell>
-                  <TableCell> R$ {balance.churchSecondLeaderPercentage.toFixed(2)}</TableCell>
-                  <TableCell>R$ {balance.mainChurchPercentage.toFixed(2)}</TableCell>
-                  <TableCell>R$ {balance.ministryPercentage.toFixed(2)}</TableCell>
-                  <TableCell>R$ {balance.mainLeaderPercentage.toFixed(2)}</TableCell>
+                  <TableCell component='th' scope='row'>{formatCurrency.format(balance.value)}</TableCell>
+                  <TableCell>{formatCurrency.format(balance.churchFirstLeaderPercentage)}</TableCell>
+                  <TableCell>{formatCurrency.format(balance.churchSecondLeaderPercentage)}</TableCell>
+                  <TableCell>{formatCurrency.format(balance.mainChurchPercentage)}</TableCell>
+                  <TableCell>{formatCurrency.format(balance.ministryPercentage)}</TableCell>
+                  <TableCell>{formatCurrency.format(balance.mainLeaderPercentage)}</TableCell>
                 </TableRow>
               ))}
               <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
                 <TableCell sx={totalTableRowStyle}>TOTAL</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.total.toFixed(2)}</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.churchFirstLeaderPercentage.toFixed(2)}</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.churchSecondLeaderPercentage.toFixed(2)}</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.mainChurchPercentage.toFixed(2)}</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.ministryPercentage.toFixed(2)}</TableCell>
-                <TableCell sx={totalTableRowStyle}>R$ {data.balancesTotal.mainLeaderPercentage.toFixed(2)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.total)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.churchFirstLeaderPercentage)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.churchSecondLeaderPercentage)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.mainChurchPercentage)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.ministryPercentage)}</TableCell>
+                <TableCell sx={totalTableRowStyle}>{formatCurrency.format(data.balancesTotal.mainLeaderPercentage)}</TableCell>
               </TableRow>
               {
                 transferTypes.map(transferType => tableMapper[transferType.type as unknown as string])
@@ -118,28 +117,28 @@ export const AccountingTable: React.FC<Props> = ({ data, tax }: Props) => {
           <TableBody>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell>Oficiais</TableCell>
-              <TableCell component='th' scope='row'> R$ {data.balancesTotal.total.toFixed(2)} </TableCell>
+              <TableCell component='th' scope='row'>{formatCurrency.format(data.balancesTotal.total)} </TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell>Repasse - Aliança</TableCell>
               <TableCell component='th' scope='row'>
-                R$ {transferTotal.toFixed(2)}
+                {formatCurrency.format(transferTotal)}
               </TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell>Repasse - GEOL</TableCell>
-              <TableCell component='th' scope='row'> R$ {data.transferGeolBalancesTotal.total.toFixed(2)} </TableCell>
+              <TableCell component='th' scope='row'>{formatCurrency.format(data.transferGeolBalancesTotal.total)} </TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell>Não Oficiais</TableCell>
               <TableCell component='th' scope='row'>
-                R$ {nonOficialTotal.toFixed(2)}
+                {formatCurrency.format(nonOficialTotal)}
               </TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell sx={{ fontWeight: 'bold' }}>Total</TableCell>
               <TableCell component='th' scope='row' sx={{ fontWeight: 'bold' }}>
-                R$ {(data.balancesTotal.total + data.transferGeolBalancesTotal.total + nonOficialTotal + transferTotal).toFixed(2)}
+                {formatCurrency.format((data.balancesTotal.total + data.transferGeolBalancesTotal.total + nonOficialTotal + transferTotal))}
               </TableCell>
             </TableRow>
           </TableBody>

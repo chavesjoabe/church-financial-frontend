@@ -3,6 +3,7 @@ export type Balance = {
   type: string;
   value: number;
   responsible: string;
+  responsibleName: string;
   createdAt: string;
   updatedAt: string;
   status: string;
@@ -62,6 +63,7 @@ export type AccountingReportItem = {
   status: string;
   balanceDate: string;
   description: string;
+  freeDescription: string;
   incomingType: string;
   churchFirstLeaderPercentage: number;
   churchSecondLeaderPercentage: number;
